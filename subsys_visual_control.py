@@ -19,7 +19,6 @@ class VisualControl:
     cmp: int = 0  # Counts the successive frames without any detected marker
 
     tello: Tello = None
-    is_one_time: bool = False
 
     @classmethod
     def setup(cls, tello: Tello):
@@ -65,8 +64,7 @@ class VisualControl:
         # Up/Down velocity control
         RCStatus.c = 1
         if target_marker.m_distance > 400:
-            cls.is_one_time = True
             RCStatus.c = int(100 * RCStatus.c)
-        if cls.is_one_time and 220 < target_marker.m_distance < 350:
+        if 220 < target_marker.m_distance < 350:
             RCStatus.c = int(150 * -RCStatus.c)
 
